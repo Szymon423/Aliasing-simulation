@@ -4,13 +4,29 @@ import matplotlib.pyplot as plt
 # for M = 64
 
 
-M = 64
-f = lambda x, n, m : np.sin(n * x + m * np.pi / 10.)
 
-X = np.linspace(0, 2*np.pi, 1000)
 
-Y = f(X, 3, -32)
 
-plt.figure()
-plt.polar(X, Y)
-plt.show()
+def genarateImage(path, M, _n):
+    f = lambda x, n, m : np.sin(n * x + m * np.pi / 10.)
+
+    X = np.linspace(0, 2*np.pi, 10000)
+    Y = f(X, _n, M)
+
+    plt.figure(figsize=(1, 1), dpi=256)
+    plt.polar(X, Y)
+    plt.grid(False)
+    plt.box(False)
+    plt.xticks([])
+    plt.yticks([])
+    plt.savefig(path)
+    plt.close()
+
+
+
+X = np.arange(-32, 33)
+i = 0
+for x in X:
+    path = "5n propeller\\" + str(i) + ".png"
+    genarateImage(path, x, 5)
+    i += 1
