@@ -29,7 +29,7 @@ def genarateImage(path, M, _n):
 # generate image sequence
 X = np.arange(-30, 30)
 i = 0
-wings = 3
+wings = 7
 directoryPath = str(wings) + "n propeller\\"
 for x in X:
     path = ""
@@ -57,17 +57,16 @@ frames[0].save(str(wings) + 'n.gif', format='GIF',
                duration=50, loop=0)
 
 
-
 # all images as 3D arrays in list 
 imagesList = [np.array(Image.open(img)) for img in imgs]
 
-mod_directory = "mod 3n propeller\\"
+mod_directory = "mod " + str(wings) + "n propeller\\"
 
 height = 240
 div = 10
 
-for j in range(59):
-    current = imagesList[j + 1].copy()
+for j in range(60):
+    current = imagesList[(j + 1) % 60].copy()
     for i in range((height // div) - 1):
         previous = imagesList[(i + j) % 60].copy()
         current[:][div * i: div * (i + 1)][:] = previous[:][div * i: div * (i + 1)][:]
